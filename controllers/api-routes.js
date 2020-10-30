@@ -3,12 +3,12 @@ const express = require('express')
 const axios = require('axios')
 //creatining modular route handlebars
 const router = express.Router()
-const url = 'https://pokeapi.co/api/v2/pokemon/'
+const url = 'https://pokeapi.co/api/v2/pokemon'
 
 
 //GET method for retrieving all pokemon data
 
-router.get('/api/search', (req, res) => {
+router.get('/api/pokemon', (req, res) => {
     axios.get(url, {
         params: {
             name: req.query.results
@@ -20,6 +20,23 @@ router.get('/api/search', (req, res) => {
         console.log('error: ' + err)
     })
 
+})
+//Get specific pokemon by name
+router.get('/api/pokemon/:name', (req, res) => {
+    axios.get(url, {
+        params: {
+            name: req.query.name,
+            abilities: req.query.abilities,
+            height: req.params.height,
+            moves: req.params.moves,
+        }
+    }).then((response) => {
+        console.log(response.data)
+        //res.json(response.data.name)
+    }).catch(err => {
+        res.status(404).json(err)
+        console.log('error: ' + err)
+    })
 })
 // router.post('/:name', (req, res) => {
 //     return res.send('received post method')
