@@ -9,8 +9,8 @@ const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-require('./controllers/api-routes.js')(app)
-
+const routes = require('./controllers/api-routes.js')
+app.use(routes)
 
 app.listen(PORT, function () {
     console.log(`Listening on PORT ${PORT}`)
