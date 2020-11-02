@@ -1,7 +1,7 @@
-const { response, request, json } = require('express')
 const express = require('express')
 const axios = require('axios')
-//creatining modular route handlebars
+
+//creating modular route handlebars
 const router = express.Router()
 const url = 'https://pokeapi.co/api/v2/pokemon'
 
@@ -25,14 +25,13 @@ router.get('/api/pokemon', (req, res) => {
 router.get('/api/pokemon/:name', (req, res) => {
     axios.get(url, {
         params: {
-            name: req.query.name,
             abilities: req.query.abilities,
-            height: req.params.height,
-            moves: req.params.moves,
+            height: req.query.height,
+            moves: req.query.moves,
         }
     }).then((response) => {
-        console.log(response.data)
-        //res.json(response.data.name)
+        //console.log(response)
+        res.json(response.data.abilities)
     }).catch(err => {
         res.status(404).json(err)
         console.log('error: ' + err)
