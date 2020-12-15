@@ -8,7 +8,7 @@ const initState = {
     isLoading: true
 }
 
-const detailReducer = (state=initState, action) => {
+const detailReducer = (state = initState, action) => {
     switch(action.type) {
         case 'GET_DETAIL':
             return {
